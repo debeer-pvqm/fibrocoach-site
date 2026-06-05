@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kostenlose Fibromyalgie-Selbsttests von Dr. Kathrin De Beer: Prüfe, ob deine Beschwerden auf Fibromyalgie hinweisen, und verstehe dein Symptommuster — verständlich erklärt.">
+  <title>Fibromyalgie Selbsttest – FibroCoach Dr. Kathrin De Beer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50:  '#E6FAF6',
+              100: '#C0F0E5',
+              200: '#8EE3CF',
+              400: '#3DD4B0',
+              500: '#2DC9A8',
+              600: '#22A88C',
+              700: '#187060',
+              800: '#105049',
+              900: '#0A3530',
+            }
+          },
+          fontFamily: {
+            sans: ['Figtree', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+          },
+          letterSpacing: {
+            tightest: '-0.03em',
+            tighter:  '-0.02em',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+    .skip-link { position: absolute; top: -100%; left: 1rem; z-index: 9999; transition: top .15s; }
+    .skip-link:focus { top: 0.75rem; }
+
+    /* WPI body-region tag selector */
+    .wpi-tag { display: block; }
+    .wpi-tag input[type="checkbox"] {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+    .wpi-tag span {
+      display: block;
+      padding: 0.4rem 0.875rem;
+      border-radius: 0.5rem;
+      border: 1.5px solid #E8E8E8;
+      background: white;
+      color: #555555;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.4;
+      user-select: none;
+      text-align: center;
+    }
+    .wpi-tag input:checked + span {
+      background: #2DC9A8; border-color: #2DC9A8; color: #1A1A1A; font-weight: 600;
+    }
+    .wpi-tag span:hover { border-color: #2DC9A8; color: #187060; }
+    .wpi-tag input:checked + span:hover { background: #22A88C; border-color: #22A88C; color: #1A1A1A; }
+    .wpi-tag input:focus-visible + span { outline: 3px solid #2DC9A8; outline-offset: 2px; }
+
+    /* Symptom & somatic checkboxes */
+    .cb-row input[type="checkbox"] {
+      width: 1.125rem; height: 1.125rem; flex-shrink: 0;
+      cursor: pointer; accent-color: #2DC9A8; margin-top: 0.125rem;
+    }
+
+    /* Severity select */
+    .severity-select {
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.875rem center;
+      padding-right: 2.5rem;
+    }
+
+    /* Radio option label states */
+    .radio-label { transition: border-color 0.15s, background 0.15s; }
+    .radio-label.selected { border-color: #2DC9A8 !important; background-color: #E6FAF6; }
+    .radio-label input[type="radio"] { accent-color: #2DC9A8; width: 1.125rem; height: 1.125rem; flex-shrink: 0; cursor: pointer; }
+
+    /* Tab button states */
+    .tab-btn { transition: all 0.2s; }
+    .tab-btn.tab-active {
+      border-color: #2DC9A8; background-color: #2DC9A8; color: #1A1A1A;
+    }
+    .tab-btn.tab-inactive {
+      border-color: #E8E8E8; background-color: white; color: #6B7280;
+    }
+    .tab-btn.tab-inactive:hover { border-color: #2DC9A8; color: #187060; }
+
+    /* Result panel */
+    .result-panel { display: none; }
+    .result-panel.visible { display: block; }
+
+    /* Progress bars in test 2 result */
+    .progress-bar { transition: width 0.6s ease-out; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .progress-bar { transition: none; }
+    }
+  </style>
+</head>
+<body class="font-sans bg-white text-[#333333] leading-[1.65] antialiased">
+
+<!-- Skip link -->
+<a href="#main-content" class="skip-link bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold text-sm">
+  Zum Hauptinhalt springen
+</a>
+
+<!-- ── NAVIGATION ───────────────────────────────────────── -->
+<header role="banner">
+  <nav class="fixed top-0 left-0 right-0 z-[200] h-[72px] bg-white/95 backdrop-blur-md border-b border-[#E8E8E8] shadow-sm"
+       aria-label="Hauptnavigation">
+    <div class="max-w-[1200px] mx-auto px-6 h-full flex items-center justify-between gap-6">
+
+      <a href="index.html" aria-label="FibroCoach – Startseite" class="flex-shrink-0">
+        <img src="68a9cf8909d2f_fibro-logo-clear.webp"
+             alt="FibroCoach – Besser leben mit Fibromyalgie"
+             class="h-11 w-auto block">
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-1" role="list">
+        <li><a href="index.html#reise"      class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Deine Reise</a></li>
+        <li><a href="index.html#ueber-mich"  class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Über mich</a></li>
+        <li><a href="index.html#webinare"    class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Webinare</a></li>
+        <li><a href="index.html#themen"      class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Themen</a></li>
+        <li><a href="index.html#newsletter"  class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Newsletter</a></li>
+        <li><a href="selbst-test.html"         class="text-[0.9375rem] font-medium text-teal-700 bg-teal-50 px-3 py-2 rounded-lg transition-colors duration-150" aria-current="page">Selbsttest</a></li>
+        <li><a href="https://blog.fibrocoach.de" class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Blog</a></li>
+        <li>
+          <a href="https://fibrocoach.app.mentortools.com/app/login/"
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-[1.125rem] py-2 rounded-xl text-sm font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px transition-all duration-200 min-h-[40px] no-underline">
+            FibroCoach Gemeinschaft
+          </a>
+        </li>
+      </ul>
+
+      <button id="nav-toggle"
+              class="lg:hidden flex items-center justify-center w-11 h-11 border-0 bg-transparent text-[#333333] rounded-lg hover:bg-teal-50 transition-colors duration-150"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="Menü öffnen">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu"
+     class="fixed inset-x-0 top-[72px] bottom-0 z-[190] bg-white px-6 pt-8 flex-col gap-2"
+     style="display:none"
+     aria-label="Mobilnavigation">
+  <a href="index.html#reise"     class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Deine Reise</a>
+  <a href="index.html#ueber-mich" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Über mich</a>
+  <a href="index.html#webinare"   class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Webinare</a>
+  <a href="index.html#themen"     class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Themen</a>
+  <a href="index.html#newsletter" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Newsletter</a>
+  <a href="selbst-test.html"        class="text-lg font-semibold text-teal-700 bg-teal-50 px-5 py-4 rounded-xl transition-colors block" aria-current="page">Selbsttest</a>
+  <a href="https://blog.fibrocoach.de" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Blog</a>
+  <a href="https://fibrocoach.app.mentortools.com/app/login/"
+     target="_blank" rel="noopener noreferrer"
+     class="mt-2 inline-flex items-center justify-center gap-2 w-full px-7 py-4 rounded-xl text-base font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 transition-all duration-200 min-h-[48px] no-underline">
+    FibroCoach Gemeinschaft
+  </a>
+</div>
+
+<main id="main-content" class="pt-[72px]">
+
+  <!-- ── 1. PAGE HERO ──────────────────────────────────── -->
+  <section class="py-[4.5rem] bg-white" id="hero" aria-labelledby="page-h1">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="max-w-[780px]">
+
+        <a href="index.html"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-teal-700 transition-colors mb-7 group no-underline">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-0.5 transition-transform"><polyline points="15 18 9 12 15 6"/></svg>
+          Zurück zur Startseite
+        </a>
+
+        <span class="inline-block text-[0.7rem] font-bold tracking-[0.12em] uppercase text-teal-600 mb-3.5">Kostenlose Selbsttests</span>
+
+        <h1 id="page-h1" class="text-[clamp(2rem,4vw,3rem)] font-extrabold text-[#1A1A1A] leading-tight tracking-[-0.03em] mb-5">
+          Was steckt hinter deinen Beschwerden?
+        </h1>
+
+        <p class="text-[1.0625rem] text-gray-500 leading-[1.8] mb-4 max-w-[60ch]">
+          Vermutest du, dass deine Schmerzen und Beschwerden mit Fibromyalgie zusammenhängen könnten? Oder hast du die Diagnose bereits und möchtest deine Symptome besser verstehen? Diese zwei Tests geben dir eine erste medizinische Einordnung — kostenlos, verständlich und ohne Anmeldung.
+        </p>
+
+        <p class="text-[1.0625rem] text-gray-500 leading-[1.8] mb-8 max-w-[60ch]">
+          Beide Tests basieren auf dem medizinischen Fibromyalgie-Symptomfragebogen, der auch in der Diagnostik eingesetzt wird.
+        </p>
+
+        <div class="bg-[#F8F8F6] border-l-[3px] border-teal-500 rounded-r-xl px-7 py-5" role="note" aria-label="Wichtiger Hinweis">
+          <p class="text-[0.9375rem] text-[#333333] leading-[1.75]">
+            <strong class="text-teal-700">Wichtiger Hinweis:</strong> Eine Diagnose kann nur durch eine Ärztin oder einen Arzt gestellt werden. Diese Tests dienen ausschließlich der Orientierung und ersetzen keinen Arztbesuch. Ähnliche Beschwerden können auch andere Ursachen haben.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. TESTS SECTION ──────────────────────────────── -->
+  <section class="py-[5.5rem] bg-[#F8F8F6]" id="tests" aria-label="Selbsttests">
+    <div class="max-w-[1200px] mx-auto px-6">
+
+      <!-- Tab navigation -->
+      <div class="mb-10" role="tablist" aria-label="Test auswählen">
+
+        <div class="flex flex-col sm:flex-row gap-3 max-w-[800px]">
+
+          <button id="tab1-btn"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="tab1-panel"
+                  class="tab-btn tab-active flex-1 text-left px-6 py-5 rounded-2xl border-2 font-semibold cursor-pointer">
+            <div class="text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-1 opacity-75">Test 1 &middot; Ohne Diagnose</div>
+            <div class="text-[1rem]">Habe ich Fibromyalgie?</div>
+            <div class="text-xs font-normal mt-1 opacity-70">Für Menschen, die ihre Beschwerden einordnen möchten</div>
+          </button>
+
+          <button id="tab2-btn"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="tab2-panel"
+                  class="tab-btn tab-inactive flex-1 text-left px-6 py-5 rounded-2xl border-2 font-semibold cursor-pointer">
+            <div class="text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-1 opacity-75">Test 2 &middot; Mit Diagnose</div>
+            <div class="text-[1rem]">Meine Symptome verstehen</div>
+            <div class="text-xs font-normal mt-1 opacity-70">Für Menschen, die Fibromyalgie bereits kennen</div>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- ══ TEST 1 PANEL ══════════════════════════════════ -->
+      <div id="tab1-panel" role="tabpanel" aria-labelledby="tab1-btn">
+        <div class="max-w-[800px]">
+
+          <p class="text-gray-500 leading-[1.8] mb-8">
+            Dieser Test basiert auf den offiziellen Fibromyalgie-Diagnosekriterien der Amerikanischen Gesellschaft für Rheumatologie (ACR 2010/2011). Er prüft zwei Dinge: wie weit deine Schmerzen verbreitet sind und wie stark deine Begleitsymptome ausgeprägt sind. Beantworte alle Fragen für die <strong class="text-[#333333]">vergangene Woche</strong>.
+          </p>
+
+          <!-- Step 1: WPI – Body regions -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-5 border border-[#E8E8E8]">
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-[#1A1A1A] font-bold text-sm" aria-hidden="true">1</span>
+              </div>
+              <div>
+                <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug mb-1">In welchen Körperregionen hattest du in der letzten Woche Schmerzen?</h2>
+                <p class="text-sm text-gray-400">Wähle alle zutreffenden Bereiche aus — auch wenn der Schmerz nur zeitweise auftrat.</p>
+              </div>
+            </div>
+
+            <!-- Kopf & Nacken -->
+            <div class="mb-5">
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 mb-2.5">Kopf &amp; Nacken</div>
+              <div class="flex flex-wrap gap-2">
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="nacken"><span>Nacken</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="kiefer-li"><span>Kiefer links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="kiefer-re"><span>Kiefer rechts</span></label>
+              </div>
+            </div>
+
+            <!-- Rumpf -->
+            <div class="mb-5">
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 mb-2.5">Rumpf</div>
+              <div class="flex flex-wrap gap-2">
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="brustkorb"><span>Brustkorb</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="bauch"><span>Bauch</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="oberer-ruecken"><span>Oberer Rücken</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="unterer-ruecken"><span>Unterer Rücken / Kreuz</span></label>
+              </div>
+            </div>
+
+            <!-- Arme (bilateral grid) -->
+            <div class="mb-5">
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 mb-2.5">Arme</div>
+              <div class="grid grid-cols-2 gap-2">
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="schulter-li"><span>Schultergürtel links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="schulter-re"><span>Schultergürtel rechts</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="oberarm-li"><span>Oberarm links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="oberarm-re"><span>Oberarm rechts</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="unterarm-li"><span>Unterarm links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="unterarm-re"><span>Unterarm rechts</span></label>
+              </div>
+            </div>
+
+            <!-- Beine (bilateral grid) -->
+            <div class="mb-6">
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 mb-2.5">Beine</div>
+              <div class="grid grid-cols-2 gap-2">
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="hufte-li"><span>Hüfte / Gesäß links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="hufte-re"><span>Hüfte / Gesäß rechts</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="oberschenkel-li"><span>Oberschenkel links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="oberschenkel-re"><span>Oberschenkel rechts</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="unterschenkel-li"><span>Unterschenkel / Fuß links</span></label>
+                <label class="wpi-tag"><input type="checkbox" name="wpi" value="unterschenkel-re"><span>Unterschenkel / Fuß rechts</span></label>
+              </div>
+            </div>
+
+            <!-- WPI counter -->
+            <div class="flex items-center gap-2.5 pt-5 border-t border-[#E8E8E8]">
+              <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <p class="text-sm text-gray-500">Ausgewählte Regionen: <strong id="wpi-count" class="text-teal-700">0</strong> von 19</p>
+            </div>
+
+          </div>
+
+          <!-- Step 2: SSS – Severity of 3 core symptoms -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-5 border border-[#E8E8E8]">
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-[#1A1A1A] font-bold text-sm" aria-hidden="true">2</span>
+              </div>
+              <div>
+                <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug mb-1">Wie stark waren diese Beschwerden in der letzten Woche?</h2>
+                <p class="text-sm text-gray-400">Bitte jede Beschwerde einzeln bewerten.</p>
+              </div>
+            </div>
+
+            <div class="space-y-5">
+
+              <div>
+                <label for="t1-fatigue" class="block text-[0.9375rem] font-semibold text-[#333333] mb-2">Müdigkeit und Erschöpfung tagsüber</label>
+                <select id="t1-fatigue" name="t1-fatigue"
+                        class="severity-select w-full border border-[#D0D0D0] rounded-xl px-4 py-3 text-[0.9375rem] text-[#333333] bg-white focus:outline-none focus:border-teal-500 focus:ring-[3px] focus:ring-teal-500/20 transition-all">
+                  <option value="">Bitte auswählen …</option>
+                  <option value="0">Nicht vorhanden</option>
+                  <option value="1">Leicht</option>
+                  <option value="2">Mäßig bis deutlich</option>
+                  <option value="3">Stark</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="t1-sleep" class="block text-[0.9375rem] font-semibold text-[#333333] mb-2">Nicht erholsamer Schlaf — morgens nicht ausgeschlafen</label>
+                <select id="t1-sleep" name="t1-sleep"
+                        class="severity-select w-full border border-[#D0D0D0] rounded-xl px-4 py-3 text-[0.9375rem] text-[#333333] bg-white focus:outline-none focus:border-teal-500 focus:ring-[3px] focus:ring-teal-500/20 transition-all">
+                  <option value="">Bitte auswählen …</option>
+                  <option value="0">Nicht vorhanden</option>
+                  <option value="1">Leicht</option>
+                  <option value="2">Mäßig bis deutlich</option>
+                  <option value="3">Stark</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="t1-cognitive" class="block text-[0.9375rem] font-semibold text-[#333333] mb-2">Denk- oder Gedächtnisprobleme / Konzentrationsschwierigkeiten</label>
+                <select id="t1-cognitive" name="t1-cognitive"
+                        class="severity-select w-full border border-[#D0D0D0] rounded-xl px-4 py-3 text-[0.9375rem] text-[#333333] bg-white focus:outline-none focus:border-teal-500 focus:ring-[3px] focus:ring-teal-500/20 transition-all">
+                  <option value="">Bitte auswählen …</option>
+                  <option value="0">Nicht vorhanden</option>
+                  <option value="1">Leicht</option>
+                  <option value="2">Mäßig bis deutlich</option>
+                  <option value="3">Stark</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Step 3: Somatic symptoms -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-5 border border-[#E8E8E8]">
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-[#1A1A1A] font-bold text-sm" aria-hidden="true">3</span>
+              </div>
+              <div>
+                <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug mb-1">Welche der folgenden Beschwerden hattest du in der letzten Woche?</h2>
+                <p class="text-sm text-gray-400">Alle zutreffenden auswählen.</p>
+              </div>
+            </div>
+
+            <div class="space-y-2.5">
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="somatic" value="unterbauch">
+                <span class="text-[0.9375rem] text-[#333333]">Schmerzen oder Krämpfe im Unterbauch</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="somatic" value="kopfschmerzen">
+                <span class="text-[0.9375rem] text-[#333333]">Kopfschmerzen</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="somatic" value="depression">
+                <span class="text-[0.9375rem] text-[#333333]">Depressive Verstimmung</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 4: Duration -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-5 border border-[#E8E8E8]">
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-[#1A1A1A] font-bold text-sm" aria-hidden="true">4</span>
+              </div>
+              <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug">Bestehen diese Beschwerden (ggf. in unterschiedlicher Stärke) seit mehr als 3 Monaten?</h2>
+            </div>
+
+            <fieldset class="border-none p-0 m-0">
+              <legend class="sr-only">Beschwerdedauer</legend>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <label class="radio-label flex items-center gap-3 flex-1 p-4 rounded-xl border-2 border-[#E8E8E8] hover:border-teal-400 cursor-pointer" data-group="duration">
+                  <input type="radio" name="duration" value="yes">
+                  <span class="text-[0.9375rem] font-medium text-[#333333]">Ja, seit mehr als 3 Monaten</span>
+                </label>
+                <label class="radio-label flex items-center gap-3 flex-1 p-4 rounded-xl border-2 border-[#E8E8E8] hover:border-teal-400 cursor-pointer" data-group="duration">
+                  <input type="radio" name="duration" value="no">
+                  <span class="text-[0.9375rem] font-medium text-[#333333]">Nein, weniger als 3 Monate</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Step 5: Exclusion -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-8 border border-[#E8E8E8]">
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-[#1A1A1A] font-bold text-sm" aria-hidden="true">5</span>
+              </div>
+              <div>
+                <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug mb-1">Hat eine ärztliche Untersuchung eine andere plausible Erklärung für deine Beschwerden ergeben?</h2>
+                <p class="text-sm text-gray-400">Z.&nbsp;B. Rheuma, Schilddrüsenerkrankung, Lupus oder eine andere diagnostizierte Erkrankung.</p>
+              </div>
+            </div>
+
+            <fieldset class="border-none p-0 m-0">
+              <legend class="sr-only">Andere Diagnose vorhanden</legend>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <label class="radio-label flex items-center gap-3 flex-1 p-4 rounded-xl border-2 border-[#E8E8E8] hover:border-teal-400 cursor-pointer" data-group="exclusion">
+                  <input type="radio" name="exclusion" value="yes">
+                  <span class="text-[0.9375rem] font-medium text-[#333333]">Ja, es gibt eine andere Diagnose</span>
+                </label>
+                <label class="radio-label flex items-center gap-3 flex-1 p-4 rounded-xl border-2 border-[#E8E8E8] hover:border-teal-400 cursor-pointer" data-group="exclusion">
+                  <input type="radio" name="exclusion" value="no">
+                  <span class="text-[0.9375rem] font-medium text-[#333333]">Nein / Noch keine ärztliche Abklärung</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Validation message -->
+          <div id="t1-validation"
+               class="hidden mb-6 p-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 text-sm font-medium flex items-center gap-2.5"
+               role="alert">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Bitte beantworte Schritt&nbsp;4 und Schritt&nbsp;5, bevor du auswertest.
+          </div>
+
+          <!-- Evaluate button -->
+          <button id="t1-evaluate"
+                  class="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-[1.0625rem] font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px active:translate-y-0 transition-all duration-200 min-h-[56px] cursor-pointer">
+            Jetzt auswerten
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+
+          <!-- Result Panel (Test 1) -->
+          <div id="t1-result"
+               class="result-panel mt-8 rounded-2xl overflow-hidden border border-[#E8E8E8]"
+               role="region"
+               aria-label="Ergebnis Test 1"
+               aria-live="polite">
+          </div>
+
+        </div>
+      </div><!-- /tab1-panel -->
+
+
+      <!-- ══ TEST 2 PANEL ══════════════════════════════════ -->
+      <div id="tab2-panel" role="tabpanel" aria-labelledby="tab2-btn" style="display:none">
+        <div class="max-w-[800px]">
+
+          <p class="text-gray-500 leading-[1.8] mb-8">
+            Dieser Test hilft dir zu verstehen, welche Bereiche deines Befindens aktuell besonders belastet sind. Er gibt deinen Beschwerden einen Namen und zeigt dir, wo du gerade am meisten Unterstützung brauchst. Kreuze alle Beschwerden an, die du in der letzten Woche <strong class="text-[#333333]">mehrfach</strong> erlebt hast.
+          </p>
+
+          <!-- Symptom checklist -->
+          <div class="bg-white rounded-2xl p-7 sm:p-8 mb-8 border border-[#E8E8E8]">
+
+            <div class="mb-6">
+              <h2 class="text-[1.0625rem] font-bold text-[#1A1A1A] leading-snug mb-1">Welche Beschwerden hattest du in der letzten Woche mehrfach?</h2>
+              <p class="text-sm text-gray-400">Alle zutreffenden auswählen.</p>
+            </div>
+
+            <div id="symptom-list" class="space-y-1">
+
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 pt-1 pb-2">Schlaf</div>
+
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="einschlafen">
+                <span class="text-[0.9375rem] text-[#333333]">Ich konnte nur schwer einschlafen</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="aufwachen">
+                <span class="text-[0.9375rem] text-[#333333]">Ich bin nachts mehrfach aufgewacht und hatte Probleme, wieder einzuschlafen</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="nicht-erholt">
+                <span class="text-[0.9375rem] text-[#333333]">Ich fühlte mich beim morgendlichen Aufwachen nicht erholt</span>
+              </label>
+
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 pt-4 pb-2">Energie &amp; Erschöpfung</div>
+
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="muede">
+                <span class="text-[0.9375rem] text-[#333333]">Ich war den ganzen Tag über müde</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="erschoepft">
+                <span class="text-[0.9375rem] text-[#333333]">Auch bei einfachen Tätigkeiten war ich schnell erschöpft</span>
+              </label>
+
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 pt-4 pb-2">Konzentration &amp; Gedächtnis</div>
+
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="konzentration">
+                <span class="text-[0.9375rem] text-[#333333]">Ich konnte mich schlecht auf Aufgaben konzentrieren</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="vergesslich">
+                <span class="text-[0.9375rem] text-[#333333]">Ich war vergesslich und habe Dinge verlegt</span>
+              </label>
+
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 pt-4 pb-2">Körperliche Empfindlichkeit</div>
+
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="magen-darm">
+                <span class="text-[0.9375rem] text-[#333333]">Ich hatte Magen- oder Darmprobleme (Durchfall, Verstopfung, Übelkeit, Bauchschmerzen)</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="temperatur">
+                <span class="text-[0.9375rem] text-[#333333]">Ich reagierte sehr empfindlich auf Wärme oder Kälte</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="geraeusche">
+                <span class="text-[0.9375rem] text-[#333333]">Ich konnte laute Geräusche und starke Gerüche nur schwer ertragen</span>
+              </label>
+
+              <div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-teal-600 pt-4 pb-2">Stimmung &amp; Psyche</div>
+
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="gereizt">
+                <span class="text-[0.9375rem] text-[#333333]">Ich war angespannt und reizbar</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="aengstlich">
+                <span class="text-[0.9375rem] text-[#333333]">Ich war ängstlich und besorgt</span>
+              </label>
+              <label class="cb-row flex items-start gap-3 p-4 rounded-xl border border-[#E8E8E8] hover:border-teal-400 hover:bg-teal-50/40 transition-all cursor-pointer">
+                <input type="checkbox" name="symptom" value="niedergeschlagen">
+                <span class="text-[0.9375rem] text-[#333333]">Ich fühlte mich niedergeschlagen und antriebslos</span>
+              </label>
+
+            </div>
+
+            <!-- Symptom counter -->
+            <div class="flex items-center gap-2.5 pt-5 mt-5 border-t border-[#E8E8E8]">
+              <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <p class="text-sm text-gray-500">Ausgewählt: <strong id="symptom-count" class="text-teal-700">0</strong> von 13</p>
+            </div>
+
+          </div>
+
+          <!-- Evaluate button (Test 2) -->
+          <button id="t2-evaluate"
+                  class="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-[1.0625rem] font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px active:translate-y-0 transition-all duration-200 min-h-[56px] cursor-pointer">
+            Jetzt auswerten
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+
+          <!-- Result Panel (Test 2) -->
+          <div id="t2-result"
+               class="result-panel mt-8 rounded-2xl overflow-hidden border border-[#E8E8E8]"
+               role="region"
+               aria-label="Ergebnis Test 2"
+               aria-live="polite">
+          </div>
+
+        </div>
+      </div><!-- /tab2-panel -->
+
+    </div>
+  </section>
+
+  <!-- ── 3. NEXT STEPS ─────────────────────────────────── -->
+  <section class="py-[5.5rem] bg-white" aria-labelledby="steps-h2">
+    <div class="max-w-[1200px] mx-auto px-6">
+
+      <div class="mb-10">
+        <span class="inline-block text-[0.7rem] font-bold tracking-[0.12em] uppercase text-teal-600 mb-3.5">Deine nächsten Schritte</span>
+        <h2 id="steps-h2" class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-[#1A1A1A] leading-tight tracking-[-0.02em] mb-4">
+          Was kommt nach dem Test?
+        </h2>
+        <p class="text-lg text-gray-500 max-w-[56ch] leading-[1.75]">
+          Unabhängig vom Ergebnis — du musst diesen Weg nicht allein gehen.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[800px]" role="list">
+
+        <!-- Card: FAQ Download -->
+        <article class="bg-white rounded-2xl p-8 flex flex-col border border-[#E8E8E8] hover:shadow-md transition-shadow duration-200" role="listitem">
+          <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-5 flex-shrink-0">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#1A1A1A] leading-snug mb-2.5">Hast du mehr Fragen als Antworten?</h3>
+          <p class="text-gray-500 leading-[1.7] flex-grow mb-6">Die häufigsten Fragen, die Betroffene stellen — ehrlich und verständlich beantwortet. Kostenlos als PDF zum Herunterladen.</p>
+          <a href="Hier-findest-du-Unterstutzung-bei-Fibromyalgie.pdf"
+             download
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-base font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px transition-all duration-200 min-h-[48px] no-underline self-start">
+            PDF herunterladen
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          </a>
+        </article>
+
+        <!-- Card: Community -->
+        <article class="bg-white rounded-2xl p-8 flex flex-col border-t-[3px] border-teal-500 shadow-none hover:shadow-md transition-shadow duration-200" role="listitem">
+          <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-5 flex-shrink-0">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#1A1A1A] leading-snug mb-2.5">Du möchtest professionelle Begleitung?</h3>
+          <p class="text-gray-500 leading-[1.7] flex-grow mb-6">In der FibroCoach-Gemeinschaft begleite ich dich monatlich live — mit medizinischen Einblicken, offenen Fragerunden und echter Unterstützung.</p>
+          <a href="https://fibrocoach.app.mentortools.com/app/login/"
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-base font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px transition-all duration-200 min-h-[48px] no-underline self-start">
+            Zur FibroCoach-Gemeinschaft
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="bg-[#1A1A1A] py-10" role="contentinfo">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-5 text-center sm:text-left">
+      <p class="text-[0.9375rem] text-white/65">
+        Dr. Kathrin De Beer &middot; Ärztin &middot; Fibromyalgie-Begleitung seit über 15 Jahren
+      </p>
+      <nav class="flex gap-7 flex-wrap justify-center" aria-label="Footer-Navigation">
+        <a href="impressum.html"   class="text-sm text-white/50 hover:text-white transition-colors duration-150">Impressum</a>
+        <a href="datenschutz.html" class="text-sm text-white/50 hover:text-white transition-colors duration-150">Datenschutz</a>
+        <a href="kontakt.html"     class="text-sm text-white/50 hover:text-white transition-colors duration-150">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Mobile nav toggle ──────────────────────────────────
+  const toggle = document.getElementById('nav-toggle');
+  const menu   = document.getElementById('mobile-menu');
+
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Menü öffnen' : 'Menü schließen');
+    menu.style.display = open ? 'none' : 'flex';
+    document.body.style.overflow = open ? '' : 'hidden';
+  });
+
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.style.display = 'none';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.style.display !== 'none') {
+      menu.style.display = 'none';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      document.body.style.overflow = '';
+      toggle.focus();
+    }
+  });
+
+  // ── Tab switching ──────────────────────────────────────
+  function switchTab(activeId) {
+    ['tab1', 'tab2'].forEach(id => {
+      const btn   = document.getElementById(id + '-btn');
+      const panel = document.getElementById(id + '-panel');
+      const isActive = id === activeId;
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.classList.toggle('tab-active',   isActive);
+      btn.classList.toggle('tab-inactive', !isActive);
+      panel.style.display = isActive ? 'block' : 'none';
+    });
+  }
+
+  document.getElementById('tab1-btn').addEventListener('click', () => switchTab('tab1'));
+  document.getElementById('tab2-btn').addEventListener('click', () => switchTab('tab2'));
+
+  // ── Radio button visual selection ──────────────────────
+  document.querySelectorAll('.radio-label input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const group = radio.name;
+      document.querySelectorAll(`.radio-label[data-group="${group}"]`).forEach(label => {
+        label.classList.remove('selected');
+      });
+      radio.closest('.radio-label').classList.add('selected');
+    });
+  });
+
+  // ── WPI live counter ────────────────────────────────────
+  const wpiCounter = document.getElementById('wpi-count');
+  document.querySelectorAll('[name="wpi"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      wpiCounter.textContent = document.querySelectorAll('[name="wpi"]:checked').length;
+    });
+  });
+
+  // ── Symptom live counter ────────────────────────────────
+  const symptomCounter = document.getElementById('symptom-count');
+  document.querySelectorAll('[name="symptom"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      symptomCounter.textContent = document.querySelectorAll('[name="symptom"]:checked').length;
+    });
+  });
+
+  // ── Test 1 evaluation ──────────────────────────────────
+  document.getElementById('t1-evaluate').addEventListener('click', () => {
+    const validMsg  = document.getElementById('t1-validation');
+    const durationEl  = document.querySelector('[name="duration"]:checked');
+    const exclusionEl = document.querySelector('[name="exclusion"]:checked');
+
+    if (!durationEl || !exclusionEl) {
+      validMsg.classList.remove('hidden');
+      validMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    validMsg.classList.add('hidden');
+
+    const wpi       = document.querySelectorAll('[name="wpi"]:checked').length;
+    const fatigue   = parseInt(document.getElementById('t1-fatigue').value)   || 0;
+    const sleep     = parseInt(document.getElementById('t1-sleep').value)     || 0;
+    const cognitive = parseInt(document.getElementById('t1-cognitive').value) || 0;
+    const somatic   = Math.min(3, document.querySelectorAll('[name="somatic"]:checked').length);
+    const sss       = fatigue + sleep + cognitive + somatic;
+    const duration  = durationEl.value === 'yes';
+    const otherDx   = exclusionEl.value === 'yes';
+
+    let borderColor, bgColor, iconSvg, title, body, rec;
+
+    if (otherDx) {
+      borderColor = '#3B82F6'; bgColor = '#EFF6FF';
+      iconSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+      title = 'Andere Erkrankung als Erklärung vorhanden';
+      body  = 'Da durch eine ärztliche Abklärung bereits eine andere Erkrankung als Erklärung für deine Beschwerden festgestellt wurde, ist dieser Test nicht eindeutig auswertbar. Wichtig zu wissen: Fibromyalgie kann auch zusammen mit anderen Erkrankungen auftreten.';
+      rec   = 'Bitte besprich deine Beschwerden offen mit deiner behandelnden Ärztin oder deinem behandelnden Arzt. Du kannst sie oder ihn auch gezielt auf Fibromyalgie ansprechen.';
+
+    } else if (!duration) {
+      borderColor = '#F59E0B'; bgColor = '#FFFBEB';
+      iconSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+      title = 'Beschwerden bestehen noch nicht lang genug';
+      body  = 'Für eine Einordnung nach den offiziellen Fibromyalgie-Kriterien müssen die Beschwerden seit mindestens 3 Monaten vorliegen. Das ist ein wichtiges Merkmal, weil Fibromyalgie eine chronische Erkrankung ist. Deine Symptome sind deshalb nicht weniger ernst zu nehmen.';
+      rec   = 'Beobachte deine Beschwerden weiter. Wenn sie anhalten oder stärker werden, suche bitte eine Ärztin oder einen Arzt auf — möglichst jemanden mit Erfahrung in der Schmerzmedizin oder Rheumatologie.';
+
+    } else if ((wpi >= 7 && sss >= 5) || (wpi >= 3 && sss >= 9)) {
+      borderColor = '#2DC9A8'; bgColor = '#E6FAF6';
+      iconSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>';
+      title = 'Hinweisend auf Fibromyalgie';
+      body  = 'Deine Angaben zeigen ein Muster, das den offiziellen medizinischen Diagnosekriterien für Fibromyalgie entspricht (Schmerzindex: ' + wpi + '\u00a0/\u00a019, Beschwerdeschwere: ' + sss + '\u00a0/\u00a012). Das bedeutet nicht zwingend, dass du Fibromyalgie hast — aber es legt nahe, dass eine ärztliche Abklärung dringend sinnvoll ist.';
+      rec   = 'Bitte suche eine Ärztin oder einen Arzt auf — am besten eine Rheumatologin, einen Rheumatologen oder eine Fachkraft für Schmerzmedizin. Du kannst dieses Ergebnis ausdrucken und als Gesprächsgrundlage mitnehmen. Eine Diagnose kann nur durch ärztliche Untersuchung gestellt werden.';
+
+    } else if ((wpi >= 5 && sss >= 3) || (wpi >= 2 && sss >= 6)) {
+      borderColor = '#F59E0B'; bgColor = '#FFFBEB';
+      iconSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+      title = 'Grenzwertiger Befund';
+      body  = 'Einige deiner Beschwerden passen zum Fibromyalgie-Muster (Schmerzindex: ' + wpi + '\u00a0/\u00a019, Beschwerdeschwere: ' + sss + '\u00a0/\u00a012), aber die vollen Diagnosekriterien werden knapp nicht erfüllt. Es ist möglich, dass deine Beschwerden zum Zeitpunkt des Tests leichter waren als gewöhnlich — Fibromyalgie-Symptome schwanken stark.';
+      rec   = 'Wenn du regelmäßig unter ähnlichen oder stärkeren Beschwerden leidest, empfehle ich ein ärztliches Gespräch. Bitte beschreibe dann auch, wie deine Beschwerden an schlechten Tagen aussehen — das Bild an einem guten Tag bildet die Erkrankung oft nicht vollständig ab.';
+
+    } else {
+      borderColor = '#9CA3AF'; bgColor = '#F9FAFB';
+      iconSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>';
+      title = 'Derzeit weniger auf Fibromyalgie hinweisend';
+      body  = 'Deine Angaben sprechen im Moment weniger für das Vorliegen einer Fibromyalgie (Schmerzindex: ' + wpi + '\u00a0/\u00a019, Beschwerdeschwere: ' + sss + '\u00a0/\u00a012). Das bedeutet nicht, dass deine Beschwerden nicht ernst zu nehmen sind. Fibromyalgie kann schwer zu erkennen sein — und die Symptome können stark schwanken.';
+      rec   = 'Wenn du trotzdem unter anhaltenden, unerklärlichen Schmerzen oder Erschöpfung leidest, sprich bitte mit einer Ärztin oder einem Arzt. Deine Beschwerden zählen — unabhängig vom Ergebnis dieses Tests.';
+    }
+
+    const resultEl = document.getElementById('t1-result');
+    resultEl.innerHTML =
+      '<div style="border-left:4px solid ' + borderColor + ';background:' + bgColor + ';" class="p-7 sm:p-8">' +
+        '<div class="flex items-start gap-4 mb-5">' +
+          '<div class="flex-shrink-0 mt-0.5" aria-hidden="true">' + iconSvg + '</div>' +
+          '<h3 class="text-[1.125rem] font-bold text-[#1A1A1A] leading-snug">' + title + '</h3>' +
+        '</div>' +
+        '<p class="text-[0.9375rem] text-[#333333] leading-[1.75] mb-5">' + body + '</p>' +
+        '<div class="flex flex-wrap gap-x-8 gap-y-1.5 mb-6 text-sm">' +
+          '<div><span class="text-gray-400">Schmerzindex (WPI):&ensp;</span><strong class="text-[#333333]">' + wpi + ' / 19</strong></div>' +
+          '<div><span class="text-gray-400">Beschwerdeschwere (SSS):&ensp;</span><strong class="text-[#333333]">' + sss + ' / 12</strong></div>' +
+        '</div>' +
+        '<div class="bg-white/70 rounded-xl p-5 border border-white/50">' +
+          '<div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-gray-400 mb-2">Meine Empfehlung</div>' +
+          '<p class="text-[0.9375rem] text-[#333333] leading-[1.7]">' + rec + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="px-7 sm:px-8 py-4 bg-white">' +
+        '<p class="text-xs text-gray-400">Dieser Test basiert auf den ACR\u00a02010/2011 Fibromyalgie-Diagnosekriterien und dient ausschließlich der Orientierung. Er ersetzt keine ärztliche Diagnose.</p>' +
+      '</div>';
+
+    resultEl.classList.add('visible');
+    setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  });
+
+  // ── Test 2 evaluation ──────────────────────────────────
+  document.getElementById('t2-evaluate').addEventListener('click', () => {
+    const total = document.querySelectorAll('[name="symptom"]:checked').length;
+
+    const countGroup = vals =>
+      vals.filter(v => document.querySelector('[name="symptom"][value="' + v + '"]:checked')).length;
+
+    const groups = [
+      { label: 'Schlaf',                     vals: ['einschlafen','aufwachen','nicht-erholt'], total: 3 },
+      { label: 'Energie & Erschöpfung',       vals: ['muede','erschoepft'],                    total: 2 },
+      { label: 'Konzentration & Gedächtnis',  vals: ['konzentration','vergesslich'],            total: 2 },
+      { label: 'Körperliche Empfindlichkeit', vals: ['magen-darm','temperatur','geraeusche'],   total: 3 },
+      { label: 'Stimmung & Psyche',           vals: ['gereizt','aengstlich','niedergeschlagen'],total: 3 },
+    ];
+
+    let borderColor, bgColor, badgeBg, levelLabel, body;
+
+    if (total <= 3) {
+      borderColor = '#2DC9A8'; bgColor = '#E6FAF6'; badgeBg = '#2DC9A8';
+      levelLabel = 'Geringe Symptombelastung';
+      body = 'Du hast ' + total + ' von 13 möglichen Beschwerden angegeben. Deine Symptombelastung ist im niedrigen Bereich — das ist ein gutes Zeichen. Wenn du dennoch anhaltende Beschwerden hast, die dich belasten, sprich bitte mit einer Ärztin oder einem Arzt.';
+    } else if (total <= 7) {
+      borderColor = '#F59E0B'; bgColor = '#FFFBEB'; badgeBg = '#F59E0B';
+      levelLabel = 'Mäßige Symptombelastung';
+      body = 'Du hast ' + total + ' von 13 möglichen Beschwerden angegeben. Eine mäßige Symptombelastung ist bei Fibromyalgie häufig — die Beschwerden schwanken und können sich durch gezielte Unterstützung und Begleitung verbessern.';
+    } else {
+      borderColor = '#F97316'; bgColor = '#FFF7ED'; badgeBg = '#F97316';
+      levelLabel = 'Hohe Symptombelastung';
+      body = 'Du hast ' + total + ' von 13 möglichen Beschwerden angegeben. Das ist eine hohe Belastung. Viele Menschen mit Fibromyalgie kennen dieses Ausmaß — es zeigt, wie viel dein Körper gerade trägt. Du brauchst und verdienst Unterstützung.';
+    }
+
+    const barsHtml = groups.map(g => {
+      const count = countGroup(g.vals);
+      const pct   = g.total > 0 ? Math.round((count / g.total) * 100) : 0;
+      return '<div class="mb-3.5">' +
+        '<div class="flex justify-between text-sm mb-1.5">' +
+          '<span class="text-[#333333] font-medium">' + g.label + '</span>' +
+          '<span class="text-gray-400">' + count + '\u00a0/\u00a0' + g.total + '</span>' +
+        '</div>' +
+        '<div class="h-2 bg-[#E8E8E8] rounded-full overflow-hidden">' +
+          '<div class="progress-bar h-full rounded-full" style="width:' + pct + '%;background:' + borderColor + ';"></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    const resultEl = document.getElementById('t2-result');
+    resultEl.innerHTML =
+      '<div style="border-left:4px solid ' + borderColor + ';background:' + bgColor + ';" class="p-7 sm:p-8">' +
+        '<div class="flex items-center gap-3 mb-4">' +
+          '<span style="background:' + badgeBg + ';" class="text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">' + total + ' / 13</span>' +
+          '<h3 class="text-[1.125rem] font-bold text-[#1A1A1A]">' + levelLabel + '</h3>' +
+        '</div>' +
+        '<p class="text-[0.9375rem] text-[#333333] leading-[1.75] mb-7">' + body + '</p>' +
+        '<div class="bg-white/70 rounded-xl p-5">' +
+          '<div class="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-gray-400 mb-4">Belastung nach Bereichen</div>' +
+          barsHtml +
+        '</div>' +
+      '</div>' +
+      '<div class="px-7 sm:px-8 py-4 bg-white">' +
+        '<p class="text-xs text-gray-400">Dieser Test dient der Orientierung und ersetzt keine ärztliche Beratung. Ergebnisse können je nach Tagesform variieren.</p>' +
+      '</div>';
+
+    resultEl.classList.add('visible');
+    setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  });
+</script>
+
+</body>
+</html>
