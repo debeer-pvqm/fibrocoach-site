@@ -45,6 +45,19 @@
     html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
     .skip-link { position: absolute; top: -100%; left: 1rem; z-index: 9999; transition: top .15s; }
     .skip-link:focus { top: 0.75rem; }
+    /* Hero decorative block behind photo */
+    .hero-photo-deco { position: relative; }
+    .hero-photo-deco::before {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      right: -1rem;
+      width: 60%;
+      height: 60%;
+      background: #E6FAF6;
+      border-radius: 1.5rem;
+      z-index: -1;
+    }
 
     /* WPI body-region tag selector */
     .wpi-tag { display: block; }
@@ -198,28 +211,45 @@
   <!-- ── 1. PAGE HERO ──────────────────────────────────── -->
   <section class="py-[4.5rem] bg-white" id="hero" aria-labelledby="page-h1">
     <div class="max-w-[1200px] mx-auto px-6">
-      <div class="max-w-[780px]">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 lg:gap-16 items-center">
 
-        <a href="index.html"
-           class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-teal-700 transition-colors mb-7 group no-underline">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-0.5 transition-transform"><polyline points="15 18 9 12 15 6"/></svg>
-          Zurück zur Startseite
-        </a>
+        <!-- Left: text -->
+        <div>
+          <a href="index.html"
+             class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-teal-700 transition-colors mb-7 group no-underline">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-0.5 transition-transform"><polyline points="15 18 9 12 15 6"/></svg>
+            Zurück zur Startseite
+          </a>
 
-        <span class="inline-block text-[0.7rem] font-bold tracking-[0.12em] uppercase text-teal-600 mb-3.5">Kostenlose Selbsttests</span>
+          <span class="inline-block text-[0.7rem] font-bold tracking-[0.12em] uppercase text-teal-600 mb-3.5">Kostenlose Selbsttests</span>
 
-        <h1 id="page-h1" class="text-[clamp(2rem,4vw,3rem)] font-extrabold text-[#1A1A1A] leading-tight tracking-[-0.03em] mb-5">
-          Was steckt hinter deinen Beschwerden?
-        </h1>
+          <h1 id="page-h1" class="text-[clamp(2rem,4vw,3rem)] font-extrabold text-[#1A1A1A] leading-tight tracking-[-0.03em] mb-5">
+            Was steckt hinter deinen Beschwerden?
+          </h1>
 
-        <p class="text-lg text-gray-500 leading-[1.8] mb-4 max-w-[60ch]">
-          Vermutest du, dass deine Schmerzen und Beschwerden mit Fibromyalgie zusammenhängen könnten? Oder hast du die Diagnose bereits und möchtest deine Symptome besser verstehen? Diese zwei Tests geben dir eine erste medizinische Einordnung — kostenlos, verständlich und ohne Anmeldung.
-        </p>
-
-<div class="bg-[#F8F8F6] border-l-[3px] border-teal-500 rounded-r-xl px-7 py-5" role="note" aria-label="Wichtiger Hinweis">
-          <p class="text-[0.9375rem] text-[#333333] leading-[1.75]">
-            <strong class="text-teal-700">Wichtiger Hinweis:</strong> Eine Diagnose kann nur durch eine Ärztin oder einen Arzt gestellt werden. Diese Tests dienen ausschließlich der Orientierung und ersetzen keinen Arztbesuch. Ähnliche Beschwerden können auch andere Ursachen haben.
+          <p class="text-lg text-gray-500 leading-[1.8] mb-6 max-w-[60ch]">
+            Vermutest du, dass deine Schmerzen und Beschwerden mit Fibromyalgie zusammenhängen könnten? Oder hast du die Diagnose bereits und möchtest deine Symptome besser verstehen? Diese zwei Tests geben dir eine erste medizinische Einordnung — kostenlos, verständlich und ohne Anmeldung.
           </p>
+
+          <div class="bg-[#F8F8F6] border-l-[3px] border-teal-500 rounded-r-xl px-7 py-5" role="note" aria-label="Wichtiger Hinweis">
+            <p class="text-[0.9375rem] text-[#333333] leading-[1.75]">
+              <strong class="text-teal-700">Wichtiger Hinweis:</strong> Eine Diagnose kann nur durch eine Ärztin oder einen Arzt gestellt werden. Diese Tests dienen ausschließlich der Orientierung und ersetzen keinen Arztbesuch. Ähnliche Beschwerden können auch andere Ursachen haben.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: photo -->
+        <div class="hero-photo-deco flex justify-center order-first lg:order-last">
+          <div class="relative w-full max-w-[280px] aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,.12)] max-lg:max-w-[200px] max-lg:aspect-square">
+            <img src="images/de_beer_3.png"
+                 alt="Dr. med. Kathrin De Beer – Fibromyalgie-Spezialistin"
+                 class="w-full h-full object-cover object-top block"
+                 onerror="this.parentElement.style.background='#F8F8F6';this.style.display='none'">
+            <div class="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 whitespace-nowrap shadow-md text-sm font-semibold text-[#1A1A1A] text-center leading-snug">
+              Dr. med. Kathrin De Beer
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Fachärztin · Fibromyalgie-Spezialistin</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -630,7 +660,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[800px]" role="list">
 
         <!-- Card: FAQ Download -->
-        <article class="bg-white rounded-2xl p-8 flex flex-col border border-[#E8E8E8] hover:shadow-md transition-shadow duration-200" role="listitem">
+        <article class="bg-white rounded-2xl p-8 flex flex-col border-t-[3px] border-teal-500 shadow-none hover:shadow-md transition-shadow duration-200" role="listitem">
           <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-5 flex-shrink-0">
             <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DC9A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
