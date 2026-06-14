@@ -110,6 +110,12 @@
     /* Progress bars in test 2 result */
     .progress-bar { transition: width 0.6s ease-out; }
 
+    /* Symptom detail panel content */
+    .t2-panel-content p { margin-bottom: 0.75rem; }
+    .t2-panel-content p:last-child { margin-bottom: 0; }
+    .t2-panel-content ul { list-style: disc; padding-left: 1.35rem; margin: 0.25rem 0 0.75rem; }
+    .t2-panel-content li { margin-bottom: 0.375rem; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
       .progress-bar { transition: none; }
@@ -844,6 +850,84 @@
   });
 
   // ── Test 2 evaluation ──────────────────────────────────
+
+  function t2Toggle(id, btn) {
+    var b = document.getElementById(id);
+    var isOpen = b.style.display !== 'none';
+    b.style.display = isOpen ? 'none' : 'block';
+    btn.querySelector('svg').style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+
+  const symptomPanels = [
+    {
+      vals: ['einschlafen','aufwachen','nicht-erholt'],
+      title: 'Schlafstörung',
+      html: `<p>Damit bist du nicht allein: Die meisten Menschen mit Fibromyalgie leiden unter Ein- und/oder Durchschlafstörungen und fühlen sich morgens nicht erholt.</p>
+<p>Schlafprobleme können verschiedene Ursachen haben:</p>
+<ul>
+<li><strong>Schmerzen</strong>, die eine angenehme Schlafposition erschweren</li>
+<li><strong>Erhöhte Reizempfindlichkeit</strong> gegenüber Geräuschen, Licht, Temperatur oder Druck</li>
+<li><strong>Nächtliches Grübeln und Sorgen</strong>, die das Abschalten verhindern</li>
+<li><strong>Anhaltende körperliche Anspannung</strong>, da das Nervensystem nachts nicht ausreichend zur Ruhe kommt</li>
+<li><strong>Tagsübers Ruhen oder Schlafen</strong>, was den Tag-Nacht-Rhythmus zusätzlich stören kann</li>
+</ul>
+<p><strong>Wichtig:</strong> Erholsamer Schlaf hängt nicht nur von der Dauer ab. Bei Fibromyalgie sind häufig besonders die <strong>Tiefschlafphasen</strong> gestört.</p>
+<p>Für eine wirksame Behandlung ist es entscheidend, deine persönlichen Schlafstörfaktoren zu erkennen und gezielt anzugehen.</p>
+<p><em><strong>Hinweis:</strong> Müdigkeit und Schlafstörungen können auch andere Ursachen haben. Bitte kläre dies gegebenenfalls mit deiner behandelnden Ärztin oder deinem Arzt ab.</em></p>`
+    },
+    {
+      vals: ['muede','erschoepft'],
+      title: 'Müdigkeit und Erschöpfung',
+      html: `<p>Du hast angegeben, dass du tagsüber unter starker Müdigkeit und schneller Erschöpfung leidest. Diese Symptome gehören zu den häufigsten Beschwerden bei Fibromyalgie.</p>
+<p>Ein wesentlicher Zusammenhang besteht mit dem oft <strong>nicht erholsamen Schlaf</strong>: Unterbrochener Schlaf und verkürzte oder fehlende <strong>Tiefschlafphasen</strong> führen dazu, dass sich Betroffene morgens trotz ausreichender Schlafdauer nicht erholt fühlen. Zusätzlich können eine <strong>vegetative Dysregulation</strong> sowie <strong>Ernährungsfaktoren</strong> zur Erschöpfung beitragen.</p>
+<p>Die Tagesmüdigkeit geht häufig mit <strong>Konzentrations- und Denkproblemen</strong> („Fibro Fog") einher.</p>
+<p><em><strong>Hinweis:</strong> Müdigkeit und Schlafstörungen können auch andere Ursachen haben. Bitte kläre dies gegebenenfalls mit deiner behandelnden Ärztin oder deinem Arzt ab.</em></p>`
+    },
+    {
+      vals: ['konzentration','vergesslich'],
+      title: 'Konzentrationsprobleme',
+      html: `<p>Viele Menschen mit Fibromyalgie haben Schwierigkeiten, sich länger zu konzentrieren oder Dinge im Kopf zu behalten. Betroffene empfinden ihre geistige Leistungsfähigkeit oft als deutlich eingeschränkt – im Alltag wie auch im Berufsleben. Hinzu kommt häufig ein „benebeltes" Gefühl im Kopf. Diese Beschwerden werden als <strong>„Fibro Fog"</strong> (medizinisch: kognitive Dysfunktion) bezeichnet.</p>
+<p>Untersuchungen zeigen, dass Konzentrations- und Gedächtnisleistungen bei Fibromyalgie messbar vermindert sein können.</p>
+<p>Die Ursachen sind nicht vollständig geklärt. Vermutlich beeinträchtigen die <strong>dauerhafte Schmerzwahrnehmung</strong>, eine <strong>erhöhte Reizempfindlichkeit</strong> sowie <strong>Schlafmangel</strong> die Verarbeitung und Speicherung von Informationen.</p>`
+    },
+    {
+      vals: ['magen-darm'],
+      title: 'Magen-Darm-Beschwerden',
+      html: `<p>Bei vielen Menschen mit Fibromyalgie liegt zusätzlich ein <strong>Reizdarmsyndrom</strong> vor. Eine ärztliche Abklärung ist dabei wichtig, da auch andere Ursachen infrage kommen.</p>
+<p>Fibromyalgie und Darmbeschwerden stehen in engem Zusammenhang: Der Magen-Darm-Trakt ist über das <strong>vegetative Nervensystem</strong>, das Hormon- und Immunsystem eng mit dem Gehirn verbunden. Ähnlich wie bei der Fibromyalgie reagiert der Darm dabei <strong>überempfindlich auf eigentlich harmlose Reize</strong>.</p>
+<p>Auch zur <strong>Zusammensetzung der Darmflora (Mikrobiom)</strong> und deren Auswirkungen auf chronische Erkrankungen wird aktuell viel geforscht.</p>`
+    },
+    {
+      vals: ['temperatur','geraeusche'],
+      title: 'Reizempfindlichkeit',
+      html: `<p>Du hast angegeben, dass du empfindlich auf äußere Reize reagierst. Auch dies ist ein typisches, wenn auch weniger bekanntes Symptom der Fibromyalgie.</p>
+<p>Ursächlich wird eine <strong>zentrale Sensitivierung</strong> angenommen: Reize werden im Nervensystem verstärkt verarbeitet. Dadurch können nicht nur Berührungen, sondern auch <strong>Wärme, Kälte, Geräusche oder Gerüche</strong> als besonders intensiv oder belastend wahrgenommen werden.</p>
+<p>Da sich solche Reize im Alltag kaum vermeiden lassen, kann dies zu einer spürbaren <strong>Beeinträchtigung im täglichen Leben</strong> führen.</p>`
+    },
+    {
+      vals: ['gereizt'],
+      title: 'Anspannung und Reizbarkeit',
+      html: `<p>Viele Menschen mit Fibromyalgie berichten, kaum noch wirklich abschalten zu können.</p>
+<p>Eine wichtige Rolle spielt dabei eine <strong>Dysregulation des vegetativen Nervensystems</strong>: Der Stressnerv (Sympathikus) ist dauerhaft überaktiv, während der Ruhenerv (Parasympathikus/Vagus) zu wenig aktiviert wird. Dadurch bleibt der Körper auch in Ruhephasen im <strong>Anspannungsmodus</strong>.</p>
+<p>Diese Fehlregulation lässt sich bei vielen Betroffenen objektiv nachweisen, zum Beispiel über die <strong>Herzratenvariabilität</strong>.</p>`
+    },
+    {
+      vals: ['aengstlich'],
+      title: 'Ängste und Sorgen',
+      html: `<p>Viele Menschen mit Fibromyalgie machen sich Sorgen um ihre Zukunft, zum Beispiel in Bezug auf Arbeit, Belastbarkeit oder familiäre Aufgaben.</p>
+<p>Darüber hinaus treten <strong>Angststörungen</strong> bei Fibromyalgie häufiger auf. Wahrscheinlich spielen dabei gemeinsame Faktoren eine Rolle, etwa biologische Besonderheiten und belastende Lebensereignisse. Körperliche Beschwerden und Ängste können sich zudem <strong>gegenseitig verstärken</strong>.</p>
+<p><em><strong>Wichtig:</strong> <strong>Angststörungen sind gut behandelbar</strong>. Wenn dich psychische Beschwerden belasten, scheue dich nicht, professionelle Hilfe in Anspruch zu nehmen – zum Beispiel über deine Hausärztin oder deinen Hausarzt, gegebenenfalls auch im Rahmen einer psychotherapeutischen oder psychiatrischen Behandlung.</em></p>`
+    },
+    {
+      vals: ['niedergeschlagen'],
+      title: 'Depressive Stimmung',
+      html: `<p>Diese Beschwerden treten bei vielen Menschen mit Fibromyalgie auf und können unterschiedlich stark ausgeprägt sein – von vorübergehender Niedergeschlagenheit bis hin zu einer <strong>depressiven Erkrankung</strong>.</p>
+<p>Chronische Schmerzen und Einschränkungen können die Stimmung belasten. Gleichzeitig treten bei Depressionen häufiger Schmerzsyndrome auf. Zudem scheinen gemeinsame biologische und psychosoziale Faktoren sowohl Fibromyalgie als auch Depressionen zu begünstigen.</p>
+<p><em><strong>Wichtig:</strong> Depressionen sind gut behandelbar. Wenn dich psychische Beschwerden belasten, wende dich bitte an deine Hausärztin oder deinen Hausarzt oder an eine psychotherapeutische oder psychiatrische Fachstelle.</em></p>
+<p><em>In akuten Krisen suche bitte sofort Hilfe (z. B. in einer psychiatrischen Klinik oder über den Notruf).</em></p>`
+    },
+  ];
+
   document.getElementById('t2-evaluate').addEventListener('click', () => {
     const total = document.querySelectorAll('[name="symptom"]:checked').length;
 
@@ -888,6 +972,30 @@
       '</div>';
     }).join('');
 
+    // Build accordion panels for each symptom the user checked
+    const checkedVals = Array.from(document.querySelectorAll('[name="symptom"]:checked')).map(el => el.value);
+    const activePanels = symptomPanels.filter(p => p.vals.some(v => checkedVals.includes(v)));
+    let panelsHtml = '';
+    if (activePanels.length > 0) {
+      panelsHtml =
+        '<div class="border-t border-[#E8E8E8] bg-white px-7 sm:px-8 py-4">' +
+          '<p class="text-[0.75rem] font-bold tracking-[0.1em] uppercase text-gray-400">Deine Beschwerden im Detail</p>' +
+        '</div>' +
+        activePanels.map((p, i) => {
+          const pid = 't2p' + i;
+          return '<div class="border-t border-[#E8E8E8]">' +
+            '<button type="button" onclick="t2Toggle(\'' + pid + '\',this)" ' +
+              'class="w-full flex items-center justify-between px-7 sm:px-8 py-4 text-left font-semibold text-[#1A1A1A] hover:bg-[#F8F8F6] transition-colors bg-white">' +
+              '<span>' + p.title + '</span>' +
+              '<svg style="flex-shrink:0;transition:transform .2s" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+            '</button>' +
+            '<div id="' + pid + '" class="t2-panel-content px-7 sm:px-8 pb-6 bg-white text-[0.9375rem] text-[#333333] leading-[1.75]" style="display:none">' +
+              p.html +
+            '</div>' +
+          '</div>';
+        }).join('');
+    }
+
     const resultEl = document.getElementById('t2-result');
     resultEl.innerHTML =
       '<div style="border-left:4px solid ' + borderColor + ';background:' + bgColor + ';" class="p-7 sm:p-8">' +
@@ -903,7 +1011,8 @@
       '</div>' +
       '<div class="px-7 sm:px-8 py-4 bg-white">' +
         '<p class="text-xs text-gray-400">Dieser Test dient der Orientierung und ersetzt keine ärztliche Beratung. Ergebnisse können je nach Tagesform variieren.</p>' +
-      '</div>';
+      '</div>' +
+      panelsHtml;
 
     resultEl.classList.add('visible');
     setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
