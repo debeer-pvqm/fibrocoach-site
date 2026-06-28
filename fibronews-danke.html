@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Danke für deine Anmeldung zum FibroNews-Newsletter von Dr. med. Kathrin De Beer.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Danke für deine Anmeldung – FibroNews</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50:  '#E6FAF6',
+              100: '#C0F0E5',
+              200: '#8EE3CF',
+              400: '#3DD4B0',
+              500: '#2DC9A8',
+              600: '#22A88C',
+              700: '#187060',
+              800: '#105049',
+              900: '#0A3530',
+            }
+          },
+          fontFamily: {
+            sans: ['Figtree', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+          },
+          letterSpacing: {
+            tightest: '-0.03em',
+            tighter:  '-0.02em',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+    .skip-link { position: absolute; top: -100%; left: 1rem; z-index: 9999; transition: top .15s; }
+    .skip-link:focus { top: 0.75rem; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="font-sans bg-white text-[#333333] leading-[1.65] antialiased">
+
+<!-- Skip link -->
+<a href="#main-content"
+   class="skip-link bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold text-sm">
+  Zum Hauptinhalt springen
+</a>
+
+<!-- ── NAVIGATION ───────────────────────────────────────── -->
+<header role="banner">
+  <nav class="fixed top-0 left-0 right-0 z-[200] h-[72px] bg-white/95 backdrop-blur-md border-b border-[#E8E8E8] shadow-sm"
+       aria-label="Hauptnavigation">
+    <div class="max-w-[1200px] mx-auto px-6 h-full flex items-center justify-between gap-6">
+
+      <a href="index.html" aria-label="FibroCoach – Startseite" class="flex-shrink-0">
+        <img src="68a9cf8909d2f_fibro-logo-clear.webp"
+             alt="FibroCoach – Besser leben mit Fibromyalgie"
+             class="h-11 w-auto block">
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-1" role="list">
+        <li><a href="index.html#reise"      class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Deine Reise</a></li>
+        <li><a href="index.html#ueber-mich" class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Über mich</a></li>
+        <li><a href="index.html#webinare"   class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Webinare</a></li>
+        <li><a href="index.html#themen"     class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Themen</a></li>
+        <li><a href="index.html#newsletter" class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Newsletter</a></li>
+        <li><a href="fibromyalgie-selbsttest.html" class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Selbsttest</a></li>
+        <li><a href="https://blog.fibrocoach.de" class="text-[0.9375rem] font-medium text-gray-500 px-3 py-2 rounded-lg hover:text-teal-700 hover:bg-teal-50 transition-colors duration-150">Blog</a></li>
+        <li>
+          <a href="https://fibrocoach.app.mentortools.com/app/login/"
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-[1.125rem] py-2 rounded-xl text-sm font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px transition-all duration-200 min-h-[40px] no-underline">
+            Login
+          </a>
+        </li>
+      </ul>
+
+      <button id="nav-toggle"
+              class="lg:hidden flex items-center justify-center w-11 h-11 border-0 bg-transparent text-[#333333] rounded-lg hover:bg-teal-50 transition-colors duration-150"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="Menü öffnen">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu"
+     class="fixed inset-x-0 top-[72px] bottom-0 z-[190] bg-white px-6 pt-8 flex-col gap-2"
+     style="display:none"
+     aria-label="Mobilnavigation">
+  <a href="index.html#reise"      class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Deine Reise</a>
+  <a href="index.html#ueber-mich" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Über mich</a>
+  <a href="index.html#webinare"   class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Webinare</a>
+  <a href="index.html#themen"     class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Themen</a>
+  <a href="index.html#newsletter" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Newsletter</a>
+  <a href="fibromyalgie-selbsttest.html" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Selbsttest</a>
+  <a href="https://blog.fibrocoach.de" class="text-lg font-semibold text-[#333333] px-5 py-4 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-colors block">Blog</a>
+  <a href="https://fibrocoach.app.mentortools.com/app/login/"
+     target="_blank" rel="noopener noreferrer"
+     class="mt-2 inline-flex items-center justify-center gap-2 w-full px-7 py-4 rounded-xl text-base font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A] hover:bg-teal-600 hover:border-teal-600 transition-all duration-200 min-h-[48px] no-underline">
+    Login
+  </a>
+</div>
+
+<!-- ── MAIN CONTENT ──────────────────────────────────────── -->
+<main id="main-content" class="pt-[72px]">
+  <section class="py-24 bg-white" aria-labelledby="danke-heading">
+    <div class="max-w-[640px] mx-auto px-6 text-center">
+
+      <!-- Badge -->
+      <span class="inline-block mb-6 px-4 py-1.5 rounded-full bg-teal-50 text-teal-700
+                   text-xs font-semibold tracking-[0.12em] uppercase">
+        FibroNews
+      </span>
+
+      <!-- Headline -->
+      <h1 id="danke-heading"
+          class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-teal-500
+                 leading-[1.1] tracking-[-0.03em] mb-5">
+        Danke!
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-[clamp(1.125rem,2vw,1.375rem)] font-semibold text-[#1A1A1A]
+                leading-[1.4] mb-6">
+        Du bist für die FibroNews angemeldet!
+      </p>
+
+      <!-- Body text -->
+      <p class="text-[1.0625rem] text-gray-500 leading-[1.8] max-w-[48ch] mx-auto mb-10">
+        Du erhältst in Kürze eine Bestätigungs-E-Mail — bitte klick auf den Link darin,
+        um deine Anmeldung abzuschließen. Schau auch im Spam-Ordner nach, falls die E-Mail
+        nicht sofort ankommt.
+      </p>
+
+      <!-- Sign-off -->
+      <p class="text-[1.0625rem] font-semibold text-[#333333] mb-10">
+        Bis bald,<br>
+        <span class="text-gray-500 font-normal text-sm">Dr. Kathrin De Beer</span>
+      </p>
+
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="index.html"
+           class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-[1.0625rem]
+                  font-semibold border-2 border-teal-500 bg-teal-500 text-[#1A1A1A]
+                  hover:bg-teal-600 hover:border-teal-600 hover:-translate-y-px
+                  hover:shadow-[0_4px_16px_rgba(45,201,168,.35)]
+                  active:translate-y-0 transition-all duration-200 min-h-[56px] no-underline">
+          Zur Startseite
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <a href="fibromyalgie-selbsttest.html"
+           class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-[1.0625rem]
+                  font-semibold border-2 border-teal-500 bg-transparent text-teal-700
+                  hover:bg-teal-50 hover:border-teal-600 hover:-translate-y-px
+                  transition-all duration-200 min-h-[56px] no-underline">
+          Zum Selbsttest
+        </a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
+<footer class="bg-[#1A1A1A] py-10" role="contentinfo">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-5 text-center sm:text-left">
+      <p class="text-[0.9375rem] text-white/65">
+        Dr. Kathrin De Beer &middot; Ärztin &middot; Fibromyalgie-Begleitung seit über 15 Jahren
+      </p>
+      <nav class="flex gap-7 flex-wrap justify-center" aria-label="Footer-Navigation">
+        <a href="impressum.html"   class="text-sm text-white/50 hover:text-white transition-colors duration-150">Impressum</a>
+        <a href="impressum.html#haftungsausschluss-gesundheit" class="text-sm text-white/50 hover:text-white transition-colors duration-150">Haftungsausschluss Gesundheit</a>
+        <a href="datenschutz.html" class="text-sm text-white/50 hover:text-white transition-colors duration-150">Datenschutz</a>
+        <a href="kontakt.html"     class="text-sm text-white/50 hover:text-white transition-colors duration-150">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu   = document.getElementById('mobile-menu');
+
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Menü öffnen' : 'Menü schließen');
+    menu.style.display = open ? 'none' : 'flex';
+    document.body.style.overflow = open ? '' : 'hidden';
+  });
+
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.style.display = 'none';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.style.display !== 'none') {
+      menu.style.display = 'none';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      document.body.style.overflow = '';
+      toggle.focus();
+    }
+  });
+</script>
+</body>
+</html>

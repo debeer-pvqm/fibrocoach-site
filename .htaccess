@@ -1,0 +1,49 @@
+Options -Indexes
+RewriteEngine On
+
+# Cache control — HTML pages must never be cached aggressively
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# MIME types — required for Firefox to play video
+<IfModule mod_mime.c>
+  AddType video/mp4  .mp4
+  AddType video/webm .webm
+</IfModule>
+
+# Long cache for versioned assets (images, fonts, CSS via CDN)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType video/mp4  "access plus 1 year"
+  ExpiresByType video/webm "access plus 1 year"
+</IfModule>
+
+# Old fibrocoach.de URLs — 301 to preserve SEO equity
+Redirect 301 /selbst-test.html /fibromyalgie-selbsttest.html
+Redirect 301 /leitfaden.html   /fibrocoach-leitfaden.html
+
+# Legacy dr-debeer.de clean-slug redirects
+Redirect 301 /fibromyalgie-selbsttest              /fibromyalgie-selbsttest.html
+Redirect 301 /selbsttest-habe-ich-fibromyalgie     /fibromyalgie-selbsttest.html
+Redirect 301 /selbsttest-fibromyalgie-symptome     /fibromyalgie-selbsttest.html
+Redirect 301 /fibrocoach-leitfaden                 /fibrocoach-leitfaden.html
+Redirect 301 /fibronews                            /fibrocoach-leitfaden.html
+Redirect 301 /privacy                              /datenschutz.html
+Redirect 301 /imprint                              /impressum.html
+Redirect 301 /fibrocoach-danke                     /fibrocoach-danke.html
+Redirect 301 /fibronews-danke                      /fibronews-danke.html
+Redirect 301 /fibronews-bestaetigung               /fibronews-danke.html
+Redirect 301 /fibrocoach-verkauf                   /fibromyalgie-selbsttest.html
+Redirect 301 /login                                https://fibrocoach.app.mentortools.com/app/login/
+Redirect 301 /fibrocoach-mitgliedschaft            https://fibrocoach.app.mentortools.com/app/login/
+Redirect 301 /fibrocoach-mitgliedschaft-fimo       https://fibrocoach.app.mentortools.com/app/login/
+Redirect 301 /fibrocoach-webinar                   /
+Redirect 301 /community-guidelines                 /
+Redirect 301 /kostenuebernahme-krankenkasse        /

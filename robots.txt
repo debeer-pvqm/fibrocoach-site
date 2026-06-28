@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /danke.html
+Disallow: /fibrocoach-danke.html
+Disallow: /fibronews-danke.html
+Sitemap: https://www.fibrocoach.de/sitemap.xml
