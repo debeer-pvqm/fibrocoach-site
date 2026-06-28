@@ -192,6 +192,43 @@
     .footer-nav a { font-size: .875rem; color: rgba(255,255,255,.5); transition: color 150ms; }
     .footer-nav a:hover { color: #fff; }
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["MedicalOrganization", "LocalBusiness"],
+        "@id": "https://www.fibrocoach.de/#organization",
+        "name": "FibroCoach – Dr. med. Kathrin De Beer",
+        "url": "https://www.fibrocoach.de/",
+        "email": "info@fibrocoach.de",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Heinrich-Schmitz-Platz 1",
+          "postalCode": "44137",
+          "addressLocality": "Dortmund",
+          "addressCountry": "DE"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "info@fibrocoach.de",
+          "contactType": "customer service",
+          "availableLanguage": "German"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.fibrocoach.de/kontakt.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.fibrocoach.de/" },
+          { "@type": "ListItem", "position": 2, "name": "Kontakt", "item": "https://www.fibrocoach.de/kontakt.html" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 

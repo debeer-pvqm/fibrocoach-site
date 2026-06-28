@@ -150,6 +150,71 @@
       .progress-bar { transition: none; }
     }
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.fibrocoach.de/fibromyalgie-selbsttest.html",
+        "url": "https://www.fibrocoach.de/fibromyalgie-selbsttest.html",
+        "name": "Fibromyalgie Selbsttest – FibroCoach Dr. Kathrin De Beer",
+        "description": "Kostenlose Fibromyalgie-Selbsttests basierend auf offiziellen Diagnosekriterien (WPI/SSS).",
+        "inLanguage": "de",
+        "isPartOf": { "@id": "https://www.fibrocoach.de/#website" },
+        "about": { "@id": "https://www.fibrocoach.de/#physician" },
+        "breadcrumb": { "@id": "https://www.fibrocoach.de/fibromyalgie-selbsttest.html#breadcrumb" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.fibrocoach.de/fibromyalgie-selbsttest.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.fibrocoach.de/" },
+          { "@type": "ListItem", "position": 2, "name": "Fibromyalgie-Selbsttest", "item": "https://www.fibrocoach.de/fibromyalgie-selbsttest.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Was ist Fibromyalgie?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fibromyalgie ist ein chronisches Schmerzsyndrom, das durch weitverbreitete Muskel- und Gelenkschmerzen, Erschöpfung und Schlafstörungen gekennzeichnet ist. Die Diagnose erfolgt anhand klinischer Kriterien (WPI und SSS-Score)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie funktioniert der Fibromyalgie-Selbsttest?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Der Test basiert auf den offiziellen ACR-Diagnosekriterien: dem Widespread Pain Index (WPI), der betroffene Körperregionen erfasst, und dem Symptom Severity Score (SSS), der Beschwerdeintensität bewertet. Das Ergebnis gibt eine erste medizinische Orientierung — ersetzt aber keinen Arztbesuch."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann der Test eine Fibromyalgie-Diagnose bestätigen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nein. Der Test dient ausschließlich der Orientierung. Eine Diagnose kann nur durch eine Ärztin oder einen Arzt gestellt werden. Ähnliche Beschwerden können auch andere Ursachen haben."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Was kommt nach dem Test?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nach dem Test erhältst du eine Einschätzung deiner Beschwerden. Bei Verdacht auf Fibromyalgie empfehlen wir den kostenlosen Leitfaden von Dr. med. Kathrin De Beer sowie die FibroCoach-Gemeinschaft für professionelle Begleitung."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="font-sans bg-white text-[#333333] leading-[1.65] antialiased">
 
@@ -240,7 +305,7 @@
           <span class="inline-block text-[0.7rem] font-bold tracking-[0.12em] uppercase text-teal-600 mb-3.5">Kostenlose Selbsttests</span>
 
           <h1 id="page-h1" class="text-[clamp(2rem,4vw,3rem)] font-extrabold text-[#1A1A1A] leading-tight tracking-[-0.03em] mb-5">
-            Was steckt hinter deinen Beschwerden?
+            Fibromyalgie-Selbsttest: Was steckt hinter deinen Beschwerden?
           </h1>
 
           <p class="text-lg text-gray-500 leading-[1.8] mb-6 max-w-[60ch]">
